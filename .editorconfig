@@ -1,0 +1,29 @@
+# このファイルは、エディタの設定を定義するためのものです。
+# ファイルの種類ごとに設定を定義することができます。
+# 詳細は、以下のURLを参照してください。
+# https://editorconfig.org/
+root = true
+
+# 全てのファイルに適用される設定
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+# 行末の空白をトリムする
+trim_trailing_whitespace = true
+# ファイルの最終行に改行を挿入する
+insert_final_newline = true
+
+# マークダウンファイルに適用される設定
+[*.md]
+# インデントサイズを4に変更する
+indent_size = 4
+# 行末の空白をトリムしないように設定する
+trim_trailing_whitespace = false
+
+# Windowsバッチファイルに適用される設定
+[*.bat]
+end_of_line = crlf
+[*.cmd]
+end_of_line = crlf
