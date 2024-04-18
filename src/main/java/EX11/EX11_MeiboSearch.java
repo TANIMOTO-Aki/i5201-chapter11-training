@@ -7,10 +7,10 @@ public class EX11_MeiboSearch {
     public static void main(String[] args) {
         KeyIn ki = new KeyIn();
         String command;
-        String date = "日付";
+        String date = GetDate.getFormattedCurrentDate();
         boolean flag = false;
 
-        System.out.println("<EX_MeiboSearch>**********　名簿照会処理　**********" + date
+        System.out.println("<EX_MeiboSearch> **********　名簿照会処理　********** (" + date + "現在)"
                 + "\n" +"-----------------------------------------------------------"
                 + "\n" + "メニュー　１）出席番号　２）名前　３）生年月日　Q）終了"
                 + "\n" +"-----------------------------------------------------------");
