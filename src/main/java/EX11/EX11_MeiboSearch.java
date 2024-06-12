@@ -1,5 +1,11 @@
 import java.util.*;
 
+/**
+ * EX11_MeiboSearchは、表示したメニューに基づいて名簿データの照会処理を行います。<br>
+ * 読み込んだ名簿データや照会結果は、クラス変数としてクラス全体で扱います。
+ * 
+ * @author Aki Tanimoto
+ */
 public class EX11_MeiboSearch {
     static FileIn fi = new FileIn();
     static String date = GetDate.getFormattedCurrentDate();
@@ -10,7 +16,17 @@ public class EX11_MeiboSearch {
     static int[] arrayHit;
     static int hitCount;
 
-    //メインメソッド メニューを表示し、各メソッドを呼び出す。
+    /** コンストラクタ */
+    EX11_MeiboSearch(){
+    }
+
+    /**
+     * mainメソッド 照会メニューを画面に表示します。<br>
+     * また、照会処理や結果の表示に必要なメソッドを呼び出します。
+     * 
+     * @param args コマンドライン引数。txtデータ名を入力し、filename引数に入力した文字列を渡します。<br>
+     * filename引数は、fileCountメソッドとstoresElementsメソッドに渡されます。
+     */
     public static void main(String[] args) {
         ConsolePassword co = new ConsolePassword();
         KeyIn ki = new KeyIn();
@@ -76,7 +92,13 @@ public class EX11_MeiboSearch {
         } while(true);
     }
 
-    // 呼び出した名簿の件数を数えて返す。
+    /**
+     * fileCountメソッドは読み込んだ名簿データの件数を数えます。
+     * 
+     * @param filename 開く名簿（txtファイル）名
+     * @return 数えた名簿の件数をint型で返します
+     * 
+     */
     public static int fileCount(String filename){
         String buff;
         int count = 0;
@@ -90,7 +112,12 @@ public class EX11_MeiboSearch {
         return count;
     }
 
-    // 渡された数を基に各種データを格納する配列を生成する。
+    /**
+     * generateArayメソッドはfileCountメソッドで数えた名簿データ件数を基に<br>
+     * 名簿データを格納する配列をクラス変数で生成します。
+     * 
+     * @param count データ件数
+     */
     public static void generateArray(int count){
         arrayNumber = new String[count];
         arrayName = new String[count];
@@ -100,7 +127,11 @@ public class EX11_MeiboSearch {
         return;
     }
 
-    // 読み込んだ名簿の値を各配列に格納する。
+    /**
+     * storesElementsメソッドはgenerateArayメソッドで生成した配列に名簿データを格納します。
+     * 
+     * @param filename 名簿データ名
+     */
     public static void storesElements(String filename){
         final int NUMBER_POSITION = 0;
         final int SURNAME_POSITION = 1;
@@ -128,8 +159,12 @@ public class EX11_MeiboSearch {
         return;
     }
 
-    // 出席番号を参照し、検索する。検索がヒットした場合、
-    // ヒット数をhitCountに格納し、格納されている要素番号をarrayHitに格納する
+    /**
+     * numberSearchメソッドは出席番号を参照して検索を行います。（完全一致のみ）<br>
+     * 検索がヒットすると、ヒット数とヒットデータが格納されている配列番号を記録します。
+     * 
+     * @param number 検索する出席番号。mainメソッドから呼び出す際に入力を求められます。
+     */
     public static void numberSearch(String number){
         int search = 0;
         hitCount = 0;
@@ -144,7 +179,12 @@ public class EX11_MeiboSearch {
         return;
     }
 
-    // 名前を参照し検索する。（完全一致のみ）
+    /**
+     * nameSearchメソッドは名前を参照して検索を行います。（完全一致のみ）<br>
+     * 検索がヒットすると、ヒット数とヒットデータが格納されている配列番号を記録します。
+     * 
+     * @param name 検索する名前。mainメソッドから呼び出す際に入力を求められます。
+     */
     public static void nameSearch(String name){
         hitCount = 0;
         for(int i = 0; i < arrayName.length; i++){
@@ -156,7 +196,12 @@ public class EX11_MeiboSearch {
         return;
     }
 
-    // 生年月日を参照し検索する。（完全一致のみ）
+    /**
+     * birthdaySearchメソッドは生年月日を参照して検索を行います。（完全一致のみ）<br>
+     * 検索がヒットすると、ヒット数とヒットデータが格納されている配列番号を記録します。
+     * 
+     * @param birthday 検索する生年月日。mainメソッドから呼び出す際に入力を求められます。
+     */
     public static void birthdaySearch(String birthday){
         hitCount = 0;
         for(int i = 0; i < arrayBirthday.length; i++){
@@ -168,7 +213,12 @@ public class EX11_MeiboSearch {
         return;
     }
 
-    // 検索メソッドで配列に格納した数値を基に、検索結果を画面に表示する。
+    /**
+     * resultDisplayメソッドは各検索メソッドの検索結果を画面に表示します。<br>
+     * また、検索がヒットしなかった場合は、該当者なしと表示します。
+     * 
+     * @param search 検索条件。検索メソッドに渡したキーワードを受け取り、結果と一緒に表示します。
+     */
     public static void resultDisplay(String search){
         System.out.println("<EX11_MeiboSearch>\t名簿データ検索表示\t(" + date + "現在)");
         System.out.println("(検索条件＝" + search + "、検索件数＝" + hitCount + "件)");
